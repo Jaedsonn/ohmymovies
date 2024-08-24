@@ -3,6 +3,7 @@ import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.share
 import { ReadonlyURLSearchParams } from "next/navigation";
 import { twMerge } from "tailwind-merge";
 import { DropdownType } from "./definitioins";
+import ky from "ky";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -59,3 +60,11 @@ export function handleSelected(
   }
   router.replace(`${path}?${params.toString()}`);
 }
+
+export const instance = ky.create({
+  prefixUrl: "https://api.themoviedb.org/3/discover/movie?",
+  headers: {
+    Authorization: `Bearer ${process.env.API_HEADER}`,
+  },
+  method: "get",
+});
