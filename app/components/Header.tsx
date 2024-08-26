@@ -1,8 +1,8 @@
 "use client";
 
-import { Search } from "@/components/Search";
-import { Filter } from "@/components/Dropdowns";
-import { categories, generos, languages } from "@/lib/utils";
+import { Search } from "@/app/components/Search";
+import { Filter } from "@/app/components/Dropdowns";
+import { categories, generos, languages } from "@/app/lib/utils";
 import { ModeToggle } from "./Buttons";
 
 export function Header() {

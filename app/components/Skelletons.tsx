@@ -1,5 +1,5 @@
 "use client";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Skeleton } from "@/app/components/ui/skeleton";
 
 export function CardSkeleton() {
   return (

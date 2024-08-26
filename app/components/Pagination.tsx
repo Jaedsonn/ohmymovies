@@ -7,7 +7,7 @@ import {
   ChevronsRight,
 } from "lucide-react";
 import { Button } from "./ui/button";
-import { handleSelected as addParams } from "@/lib/utils";
+import { handleSelected as addParams } from "@/app/lib/utils";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 
 export const Pagination = ({ totalPages }: { totalPages: string }) => {
@@ -15,7 +15,7 @@ export const Pagination = ({ totalPages }: { totalPages: string }) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const lastPage = Number(totalPages) - 100
+  const lastPage = Number(totalPages) - 100;
   const currentPage = searchParams.get("page") || "1";
 
   return (
@@ -64,7 +64,13 @@ export const Pagination = ({ totalPages }: { totalPages: string }) => {
         <Button
           variant={`secondary`}
           onClick={() =>
-            addParams(lastPage.toString(), searchParams, router, pathname, "page")
+            addParams(
+              lastPage.toString(),
+              searchParams,
+              router,
+              pathname,
+              "page"
+            )
           }
         >
           <ChevronsRight />

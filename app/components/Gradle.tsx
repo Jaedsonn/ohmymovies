@@ -1,8 +1,8 @@
 import Card from "./Card";
 import { Pagination } from "./Pagination";
 import { CardSkeleton } from "./Skelletons";
-import { getMovie } from "@/lib/data";
-import { CardMovie } from "@/lib/definitioins";
+import { getMovie } from "@/app/lib/data";
+import { CardMovie } from "@/app/lib/definitioins";
 
 export default async function Gradle({
   adult,

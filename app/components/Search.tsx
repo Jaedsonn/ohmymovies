@@ -2,7 +2,7 @@
 
 import { Input } from "./ui/input";
 import { useDebouncedCallback } from "use-debounce";
-import { handleSelected as select } from "@/lib/utils";
+import { handleSelected as select } from "@/app/lib/utils";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
 export function Search() {

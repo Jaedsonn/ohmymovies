@@ -1,10 +1,10 @@
-import { ModeToggle } from "@/components/Buttons";
-import { CardSkeleton, GradleSkeleton } from "@/components/Skelletons";
-import { searchParams as ParamsType } from "@/lib/definitioins";
-import Gradle from "@/components/Gradle";
+import { ModeToggle } from "@/app/components/Buttons";
+import { CardSkeleton, GradleSkeleton } from "@/app/components/Skelletons";
+import { searchParams as ParamsType } from "@/app/lib/definitioins";
+import Gradle from "@/app/components/Gradle";
 import { Suspense } from "react";
-import { Header } from "@/components/Header";
-import { Pagination } from "@/components/Pagination";
+import { Header } from "@/app/components/Header";
+import { Pagination } from "@/app/components/Pagination";
 
 export default async function Home({
   searchParams,
@@ -24,7 +24,6 @@ export default async function Home({
       <Suspense fallback={<GradleSkeleton />}>
         <Gradle adult={adult} language={language} page={page} genre={genre} />
       </Suspense>
-     
     </div>
   );
 }

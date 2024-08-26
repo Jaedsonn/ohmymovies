@@ -2,9 +2,9 @@
 
 import * as React from "react";
 import { Check, ChevronsUpDown } from "lucide-react";
-import { cn, generos, handleSelected as select } from "@/lib/utils";
-import { DropdownType } from "@/lib/definitioins";
-import { Button } from "@/components/ui/button";
+import { cn, generos, handleSelected as select } from "@/app/lib/utils";
+import { DropdownType } from "@/app/lib/definitioins";
+import { Button } from "@/app/components/ui/button";
 import {
   Command,
   CommandEmpty,
@@ -12,23 +12,22 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@/components/ui/command";
+} from "@/app/components/ui/command";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
+} from "@/app/components/ui/popover";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
-
 
 export function Filter({
   source,
   label,
-  paramName
+  paramName,
 }: {
   source: DropdownType[];
   label: string;
-  paramName:string
+  paramName: string;
 }) {
   const [open, setOpen] = React.useState(false);
   const [selectedStatus, setSelectedStatus] =
@@ -37,7 +36,6 @@ export function Filter({
   const path = usePathname();
   const searchparams = useSearchParams();
   const router = useRouter();
-
 
   return (
     <div className="flex items-center space-x-4 max-w-44 grow">
