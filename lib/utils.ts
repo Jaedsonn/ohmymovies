@@ -66,5 +66,5 @@ export const instance = ky.create({
   headers: {
     Authorization: `Bearer ${process.env.API_HEADER}`,
   },
-  method: "get",
+  method: "get"
 });

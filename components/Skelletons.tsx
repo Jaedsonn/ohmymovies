@@ -1,3 +1,4 @@
+"use client";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export function CardSkeleton() {
@@ -8,6 +9,16 @@ export function CardSkeleton() {
         <Skeleton className="w-full h-4" />
         <Skeleton className="w-full h-4" />
       </div>
+    </div>
+  );
+}
+
+export function GradleSkeleton() {
+  return (
+    <div className={`h-auto flex gap-6 flex-wrap w-full`}>
+      {Array.from({ length: 40 }).map((_, i) => (
+        <CardSkeleton key={i} />
+      ))}
     </div>
   );
 }

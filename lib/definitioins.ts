@@ -4,7 +4,7 @@ export type DropdownType = {
 };
 
 export type CardMovie = {
-  backdrop_path: string;
+  poster_path: string;
   original_title: string;
   vote_average: string;
 };
@@ -15,3 +15,7 @@ export type searchParams = {
   adult?: string;
   language?: string;
 };
+
+export type TotalPages = { total_pages: number }
+
+export type GetMovies = {data: CardMovie[], pages:TotalPages}

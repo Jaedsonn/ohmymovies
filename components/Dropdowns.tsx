@@ -40,7 +40,7 @@ export function Filter({
 
 
   return (
-    <div className="flex items-center space-x-4">
+    <div className="flex items-center space-x-4 max-w-44 grow">
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button

@@ -20,6 +20,7 @@ export function Search() {
       type="search"
       onChange={(e) => handleChange(e.target.value)}
       className={`max-w-96`}
+      disabled
     ></Input>
   );
 }
