@@ -15,6 +15,7 @@ export default async function Home({
   const genre = searchParams?.genre || "";
   const adult = searchParams?.adult || "";
   const language = searchParams?.language || "";
+   console.log(process.env.API_HEADER);
 
   return (
     <div

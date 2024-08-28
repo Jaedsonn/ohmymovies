@@ -6,6 +6,7 @@ import { categories, generos, languages } from "@/app/lib/utils";
 import { ModeToggle } from "./Buttons";
 
 export function Header() {
+ 
   return (
     <header className={`flex flex-col gap-4 items-start w-full`}>
       <div>

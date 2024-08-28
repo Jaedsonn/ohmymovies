@@ -22,7 +22,7 @@ export default async function Gradle({
   });
 
   const movies = await getMovie(page, language, adult, genre);
-  movies?.pages;
+ 
   return (
     <div className={`flex flex-col gap-8`}>
       <div className={`h-auto flex gap-6 flex-wrap w-fit`}>
