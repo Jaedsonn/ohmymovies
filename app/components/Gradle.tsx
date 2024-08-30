@@ -9,11 +9,13 @@ export default async function Gradle({
   language,
   page,
   genre,
+  query
 }: {
   adult: string;
   language: string;
   page: string;
   genre: string;
+  query:string
 }) {
   const promise = await new Promise((res, rej) => {
     setTimeout(() => {
@@ -21,7 +23,7 @@ export default async function Gradle({
     }, 1000);
   });
 
-  const movies = await getMovie(page, language, adult, genre);
+  const movies = await getMovie(page, language, adult, genre, query);
  
   return (
     <div className={`flex flex-col gap-8 items-center justify-center`}>

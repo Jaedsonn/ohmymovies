@@ -15,6 +15,7 @@ export default async function Home({
   const genre = searchParams?.genre || "";
   const adult = searchParams?.adult || "";
   const language = searchParams?.language || "";
+  const query = searchParams?.query || ""
    console.log(process.env.API_HEADER);
 
   return (
@@ -23,7 +24,7 @@ export default async function Home({
     >
       <Header />
       <Suspense fallback={<GradleSkeleton />}>
-        <Gradle adult={adult} language={language} page={page} genre={genre} />
+        <Gradle adult={adult} language={language} page={page} genre={genre} query={query}/>
       </Suspense>
     </div>
   );

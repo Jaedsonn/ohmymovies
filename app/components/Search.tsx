@@ -6,6 +6,8 @@ import { handleSelected as select } from "@/app/lib/utils";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
 export function Search() {
+  
+
   const router = useRouter();
   const path = usePathname();
   const searchparams = useSearchParams();
@@ -20,7 +22,6 @@ export function Search() {
       type="search"
       onChange={(e) => handleChange(e.target.value)}
       className={`max-w-96 min-w-32`}
-      disabled
     ></Input>
   );
 }

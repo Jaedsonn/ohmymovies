@@ -14,6 +14,7 @@ export type searchParams = {
   genre?: string;
   adult?: string;
   language?: string;
+  query?: string;
 };
 
 export type TotalPages = { total_pages: number }

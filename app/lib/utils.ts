@@ -68,3 +68,14 @@ export const instance = ky.create({
   },
   method: "get"
 });
+
+export const searchInstance = ky.create({
+  prefixUrl: "https://api.themoviedb.org/3/search",
+  headers: {
+    Authorization: `Bearer ${process.env.API_HEADER}`,
+  },
+  method: "get",
+});
+
+
+
