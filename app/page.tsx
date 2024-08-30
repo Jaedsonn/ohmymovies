@@ -19,7 +19,7 @@ export default async function Home({
 
   return (
     <div
-      className={`flex flex-col items-center gap-8 p-6 h-auto max-w-[1500px] ml-24`}
+      className={`flex flex-col items-center gap-8 p-6 h-auto`}
     >
       <Header />
       <Suspense fallback={<GradleSkeleton />}>

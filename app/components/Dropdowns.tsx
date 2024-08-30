@@ -38,18 +38,18 @@ export function Filter({
   const router = useRouter();
 
   return (
-    <div className="flex items-center space-x-4 max-w-44 grow">
+    <div className="flex items-center space-x-4 max-w-44 shrink">
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
             variant="outline"
             size="sm"
-            className="w-[150px] justify-start"
+            className="w-[150px] justify-start py-4"
           >
             {selectedStatus ? <>{selectedStatus.label}</> : <> Set {label}</>}
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="p-0" side="right" align="start">
+        <PopoverContent className="p-0" side="bottom" align="center">
           <Command>
             <CommandInput placeholder="Change status..." />
             <CommandList>

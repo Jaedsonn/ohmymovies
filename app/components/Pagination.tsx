@@ -19,7 +19,7 @@ export const Pagination = ({ totalPages }: { totalPages: string }) => {
   const currentPage = searchParams.get("page") || "1";
 
   return (
-    <div className={`flex gap-8 items-center self-end mr-32`}>
+    <div className={`flex gap-8 items-center self-end flex-wrap `}>
       <p className={`text-base font-semibold`}>
         Page {currentPage == "1" ? "1" : Number(currentPage) - 1} of{" "}
         {totalPages}

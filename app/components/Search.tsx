@@ -19,7 +19,7 @@ export function Search() {
       placeholder="Search for Movies"
       type="search"
       onChange={(e) => handleChange(e.target.value)}
-      className={`max-w-96`}
+      className={`max-w-96 min-w-32`}
       disabled
     ></Input>
   );

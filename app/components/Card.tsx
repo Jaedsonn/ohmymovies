@@ -25,7 +25,7 @@ export default function Card({
       />
 
       <div className={`flex flex-col gap-1 w-full items-start`}>
-        <h1 className={`font-black text-sm `}>{name}</h1>
+        <h1 className={`font-black text-sm `}>{name.slice(0, 15)}...</h1>
         <h2 className={`font-normal text-sm flex items-center gap-2`}>
           <Star />
           {director}
