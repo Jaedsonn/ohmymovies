@@ -16,7 +16,6 @@ export default async function Home({
   const adult = searchParams?.adult || "";
   const language = searchParams?.language || "";
   const query = searchParams?.query || ""
-   console.log(process.env.API_HEADER);
 
   return (
     <div
