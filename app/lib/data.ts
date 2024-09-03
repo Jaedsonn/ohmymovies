@@ -1,4 +1,5 @@
-import { CardMovie, GetMovies, TotalPages } from "./definitioins";
+import { CardMovie, GetMovies, PopularMovieCard, TotalPages } from "./definitioins";
+import ky from "ky";
 import { instance, searchInstance } from "./utils";
 
 export async function getMovie(
@@ -14,7 +15,7 @@ export async function getMovie(
 
     for (let i = 0; i < 2; i++) {
       let request = await instance.get(
-        `?include_adult=${adult}&language=${language}&page=${
+        `movie?include_adult=${adult}&language=${language}&page=${
           Number(page) + i
         }&sort_by=popularity.desc&with_genres=${genre}&region=BR&with_original_language=en`
       );
@@ -33,6 +34,18 @@ export async function getMovie(
     }
 
     return { data, pages };
+  } catch (error) {
+    return null;
+  }
+}
+
+export async function getPopularMovies(apikey:string, language:string) {
+  try {
+    const request = await ky.get(
+      `https://api.themoviedb.org/3/movie/popular?language=${language}&page=1&api_key=${apikey}`
+    );
+    const toJson: { results: PopularMovieCard[] } = await request.json();
+    return toJson?.results;
   } catch (error) {
     return null;
   }
