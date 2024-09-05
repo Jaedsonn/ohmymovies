@@ -26,12 +26,7 @@ export function HomeMoviesCarousel({
   const plugin = Autoplay({ delay: 3000, stopOnInteraction: true });
 
   return (
-    <Carousel
-      plugins={[plugin]}
-      className="w-auto"
-    
-      onMouseLeave={plugin.reset}
-    >
+    <Carousel plugins={[plugin]} className="w-auto" onMouseLeave={plugin.reset}>
       <CarouselContent className={`w-full`}>
         {movies?.map((movie: PopularMovieCard, index: number) => (
           <CarouselItem key={index}>
@@ -48,10 +43,12 @@ export function HomeMoviesCarousel({
                 />
                 <div className={`flex  flex-col justify-between`}>
                   <div>
-                    <h1 className={`font-bold text-4xl mb-8`}>
+                    <h1 className={`font-bold text-4xl mb-8 text-white`}>
                       {movie.original_title}
                     </h1>
-                    <p className={` text-xl font-normal max-w-3xl mb-4`}>
+                    <p
+                      className={` text-xl font-normal max-w-3xl mb-4 text-white`}
+                    >
                       {movie.overview}
                     </p>
                     <span
