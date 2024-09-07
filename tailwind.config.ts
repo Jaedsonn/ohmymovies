@@ -21,6 +21,8 @@ const config = {
       backgroundImage: {
         "carousel-movie":
           "linear-gradient(120deg, rgba(9,9,11,1) 12%, rgba(255,255,255,0) 97%)",
+        "dark-carousel-movie":
+          "linear-gradient(120deg, rgba(255,255,255,0.9401961468181023) 12%, rgba(255,255,255,0) 97%);",
       },
       colors: {
         border: "hsl(var(--border))",

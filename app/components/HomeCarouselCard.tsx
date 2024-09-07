@@ -5,7 +5,7 @@ const HomeCarouselCard = ({ image, children }: { image: string, children: React.
   return (
     <div className="relative w-full max-h-700 ">
       <div
-        className="absolute inset-0 w-full h-full bg-carousel-movie flex items-center justify-center"
+        className="absolute inset-0 w-full h-full dark:bg-carousel-movie bg-dark-carousel-movie flex items-center justify-center"
         style={{ zIndex: 1 }}
       >
         {children}

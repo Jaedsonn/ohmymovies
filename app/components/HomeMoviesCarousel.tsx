@@ -41,12 +41,12 @@ export function HomeMoviesCarousel({
                 <div className={`flex  flex-col justify-between`}>
                   <div>
                     <h1
-                      className={`font-bold text-4xl lg:mb-8 mb-4 text-white`}
+                      className={`font-bold text-4xl lg:mb-8 mb-4 `}
                     >
                       {movie.original_title}
                     </h1>
                     <p
-                      className={` text-xl font-normal max-w-3xl mb-4 text-white`}
+                      className={` text-xl font-normal max-w-3xl mb-4 `}
                     >
                       {movie.overview}
                     </p>
