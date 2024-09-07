@@ -26,6 +26,5 @@ export type searchParams = {
   query?: string;
 };
 
-export type TotalPages = { total_pages: number }
 
-export type GetMovies = {data: CardMovie[], pages:TotalPages}
+export type GetMovies = {data: CardMovie[], pages:number}

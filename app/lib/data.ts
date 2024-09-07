@@ -1,4 +1,4 @@
-import { CardMovie, GetMovies, PopularMovieCard, TotalPages } from "./definitioins";
+import { CardMovie, GetMovies, PopularMovieCard } from "./definitioins";
 import ky from "ky";
 import { instance, searchInstance } from "./utils";
 
@@ -11,27 +11,28 @@ export async function getMovie(
 ): Promise<GetMovies | null> {
   try {
     let data: CardMovie[] = [];
-    let pages: TotalPages = { total_pages: 1 };
+    let pages: number = 1;
 
-    for (let i = 0; i < 2; i++) {
+    let currentPage = page;
+    
       let request = await instance.get(
         `movie?include_adult=${adult}&language=${language}&page=${
-          Number(page) + i
+          currentPage
         }&sort_by=popularity.desc&with_genres=${genre}&region=BR&with_original_language=en`
       );
       if (query) {
         request = await searchInstance.get(
           `movie?query=${query}&include_adult=true&language=en-US&page=${
-            Number(page) + i
+            currentPage
           }`
         );
       }
-      const toJson: { results: CardMovie[]; total_pages: TotalPages } =
+      const toJson: { results: CardMovie[]; total_pages: number } =
         await request.json();
       const results: CardMovie[] = toJson?.results;
       data = [...data, ...results];
-      pages = toJson?.total_pages;
-    }
+      pages = toJson?.total_pages > 500 ? 500 : toJson?.total_pages;
+    
 
     return { data, pages };
   } catch (error) {
@@ -39,7 +40,7 @@ export async function getMovie(
   }
 }
 
-export async function getPopularMovies(apikey:string, language:string) {
+export async function getPopularMovies(apikey: string, language: string) {
   try {
     const request = await ky.get(
       `https://api.themoviedb.org/3/movie/popular?language=${language}&page=1&api_key=${apikey}`
