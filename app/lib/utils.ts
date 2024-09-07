@@ -31,6 +31,28 @@ export const generos: DropdownType[] = [
   { value: "37", label: "Faroeste" },
 ];
 
+export enum Generos {
+  Acao = 28,
+  Aventura = 12,
+  Animacao = 16,
+  Comedia = 35,
+  Crime = 80,
+  Documentario = 99,
+  Drama = 18,
+  Familia = 10751,
+  Fantasia = 14,
+  Historia = 36,
+  Terror = 27,
+  Musica = 10402,
+  Misterio = 9648,
+  Romance = 10749,
+  FiccaoCientifica = 878,
+  CinemaTV = 10770,
+  Thriller = 53,
+  Guerra = 10752,
+  Faroeste = 37,
+}
+
 export const categories: DropdownType[] = [
   { label: "Adult", value: true },
   { label: "Kids", value: false },
@@ -62,7 +84,7 @@ export function handleSelected(
 }
 
 export const instance = ky.create({
-  prefixUrl: "https://api.themoviedb.org/3/discover/movie?",
+  prefixUrl: "https://api.themoviedb.org/3/discover",
   headers: {
     Authorization: `Bearer ${process.env.API_HEADER}`,
   },
@@ -76,6 +98,4 @@ export const searchInstance = ky.create({
   },
   method: "get",
 });
-
-
 
