@@ -1,4 +1,9 @@
-import { CardMovie, GetMovies, PopularMovieCard } from "./definitioins";
+import {
+  CardMovie,
+  GetMovies,
+  PopularMovieCard,
+  SingleMovie,
+} from "./definitioins";
 import ky from "ky";
 import { instance, searchInstance } from "./utils";
 
@@ -14,25 +19,20 @@ export async function getMovie(
     let pages: number = 1;
 
     let currentPage = page;
-    
-      let request = await instance.get(
-        `movie?include_adult=${adult}&language=${language}&page=${
-          currentPage
-        }&sort_by=popularity.desc&with_genres=${genre}&region=BR&with_original_language=en`
+
+    let request = await instance.get(
+      `movie?include_adult=${adult}&language=${language}&page=${currentPage}&sort_by=popularity.desc&with_genres=${genre}&region=BR&with_original_language=en`
+    );
+    if (query) {
+      request = await searchInstance.get(
+        `movie?query=${query}&include_adult=true&language=en-US&page=${currentPage}`
       );
-      if (query) {
-        request = await searchInstance.get(
-          `movie?query=${query}&include_adult=true&language=en-US&page=${
-            currentPage
-          }`
-        );
-      }
-      const toJson: { results: CardMovie[]; total_pages: number } =
-        await request.json();
-      const results: CardMovie[] = toJson?.results;
-      data = [...data, ...results];
-      pages = toJson?.total_pages > 500 ? 500 : toJson?.total_pages;
-    
+    }
+    const toJson: { results: CardMovie[]; total_pages: number } =
+      await request.json();
+    const results: CardMovie[] = toJson?.results;
+    data = [...data, ...results];
+    pages = toJson?.total_pages > 500 ? 500 : toJson?.total_pages;
 
     return { data, pages };
   } catch (error) {
@@ -47,6 +47,37 @@ export async function getPopularMovies(apikey: string, language: string) {
     );
     const toJson: { results: PopularMovieCard[] } = await request.json();
     return toJson?.results;
+  } catch (error) {
+    return null;
+  }
+}
+
+export async function getSingleMovie(
+  movieId: number,
+  apikey: string,
+  language: string
+) {
+  try {
+    const url = `https://api.themoviedb.org/3/movie/${movieId}?language=${language}&api_key=${apikey}`;
+    const result = await ky.get(url);
+    const toJson: SingleMovie = await result.json();
+
+    return toJson;
+  } catch (error) {
+    return null;
+  }
+}
+
+export async function getSimilarMovie(
+  movieId: number,
+  apiKey: string,
+  language: string
+) {
+  try {
+    const url = `https://api.themoviedb.org/3/movie/${movieId}/similar?language=${language}&api_key=${apiKey}`;
+    const result = await ky.get(url);
+    const toJson: { results: SingleMovie[] } = await result.json();
+    return toJson;
   } catch (error) {
     return null;
   }

@@ -7,6 +7,7 @@ export type CardMovie = {
   poster_path: string;
   original_title: string;
   vote_average: string;
+  id: number;
 };
 
 export type PopularMovieCard = {
@@ -15,7 +16,7 @@ export type PopularMovieCard = {
   original_title: string;
   vote_average: string;
   overview: string;
-  genre_ids:number[]
+  genre_ids: number[];
 };
 
 export type searchParams = {
@@ -26,5 +27,22 @@ export type searchParams = {
   query?: string;
 };
 
+export type GetMovies = { data: CardMovie[]; pages: number };
 
-export type GetMovies = {data: CardMovie[], pages:number}
+export type SingleMovie = {
+  adult: boolean;
+  backdrop_path: string;
+  budget: number;
+  genres: {
+    id: number;
+    name: string;
+  }[];
+  id: number;
+  origin_country: string[];
+  original_language: string;
+  original_title: string;
+  overview: string;
+  popularity: number;
+  poster_path: string;
+  vote_average: number;
+};

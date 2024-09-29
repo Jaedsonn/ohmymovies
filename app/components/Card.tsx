@@ -1,19 +1,25 @@
 import Image from "next/image";
 import { Star } from "lucide-react";
+import Link from "next/link";
 
 export default async function Card({
   name,
   director,
   image,
+  movieId
 }: {
   name: string;
   director: string;
   image: string;
+  movieId: number;
 }) {
   name = name.length >= 15 ? name.slice(0, 16) + "..." : name;
 
   return (
-    <div className={`max-w-36 h-fit flex flex-col gap-3 justify-between`}>
+    <Link
+      className={`max-w-36 h-fit flex flex-col gap-3 justify-between`}
+      href={`/${movieId}`}
+    >
       <Image
         src={`https://image.tmdb.org/t/p/w400${image}`}
         alt="Movie poster"
@@ -31,6 +37,6 @@ export default async function Card({
           {director}
         </h2>
       </div>
-    </div>
+    </Link>
   );
 }
