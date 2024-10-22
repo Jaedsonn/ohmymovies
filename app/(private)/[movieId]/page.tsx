@@ -67,7 +67,12 @@ const MoviePage = async ({
           style={{ zIndex: 2 }}
         />
       </div>
-      <Recomendeds movieId={params.movieId} />
+      <Recomendeds
+        movieId={params.movieId}
+        searchParams={{
+          language: searchParams.language,
+        }}
+      />
     </section>
   );
 };

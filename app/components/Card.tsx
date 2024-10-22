@@ -1,12 +1,15 @@
+"use client";
+
 import Image from "next/image";
 import { Star } from "lucide-react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
-export default async function Card({
+export default function Card({
   name,
   director,
   image,
-  movieId
+  movieId,
 }: {
   name: string;
   director: string;
@@ -15,10 +18,12 @@ export default async function Card({
 }) {
   name = name.length >= 15 ? name.slice(0, 16) + "..." : name;
 
+  const searchParams = useSearchParams();
+
   return (
     <Link
       className={`max-w-36 h-fit flex flex-col gap-3 justify-between`}
-      href={`/${movieId}`}
+      href={`/${movieId}?${searchParams.toString()}`}
     >
       <Image
         src={`https://image.tmdb.org/t/p/w400${image}`}

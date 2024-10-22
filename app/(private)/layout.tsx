@@ -14,7 +14,6 @@ export default function RootLayout({
       className={`${inter.className} flex flex-col items-center justify-center h-auto`}
     >
       <NavBar />
-
       {children}
     </div>
   );
