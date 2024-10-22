@@ -20,7 +20,6 @@ import { deleteCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
 
 const NavBar = () => {
-  
   const router = useRouter();
   const logout = () => {
     deleteCookie("token");

@@ -1,6 +1,5 @@
 "use client";
 import Link from "next/link";
-
 import { Button } from "@/app/components/ui/button";
 import { Input } from "@/app/components/ui/input";
 import { Label } from "@/app/components/ui/label";
@@ -10,6 +9,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { setCookie } from "cookies-next";
 import ky from "ky";
+import { useState } from "react";
+import clsx from "clsx";
 
 const schema = z.object({
   email: z.string().email("Email inválido"),
@@ -23,6 +24,8 @@ type Zschema = z.infer<typeof schema>;
 
 export default function Signup() {
   const router = useRouter();
+  const [error, setError] = useState<boolean | null>(null);
+
   const {
     register,
     handleSubmit,
@@ -33,15 +36,15 @@ export default function Signup() {
 
   const onSubmit: SubmitHandler<Zschema> = async (data) => {
     try {
-      console.log(JSON.stringify(data));
       const response = await ky.post("http://localhost:4001/signup", {
         json: data,
       });
       const toJson: { token: string } = await response.json();
       setCookie("token", toJson.token, { maxAge: 604800 });
       router.push("/movies");
+      setError(false)
     } catch (error) {
-      console.log(error);
+      setError(true);
     }
   };
 
@@ -101,7 +104,14 @@ export default function Signup() {
                 </span>
               )}
             </div>
-            <Button type="submit" className="w-full">
+            <Button
+              type="submit"
+              className={clsx("w-full transition", {
+                "bg-red-600 text-white": error === true,
+                "bg-emerald-600 text-white": error === false,
+                "bg-white text-black": error === null,
+              })}
+            >
               {isSubmitting == true ? (
                 <div
                   className={`w-8 h-8 rounded-full border-2  p-4 border-black transition

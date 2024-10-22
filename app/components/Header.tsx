@@ -16,9 +16,7 @@ export function Header() {
           All your movies in a simple page
         </h2>
       </div>
-      <nav className="flex w-full  justify-center flex-1 flex-wrap">
-       
-      </nav>
+      <nav className="flex w-full  justify-center flex-1 flex-wrap"></nav>
     </header>
   );
 }
