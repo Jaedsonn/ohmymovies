@@ -1,6 +1,6 @@
 import { Inter } from "next/font/google";
 import NavBar from "../components/NavBar";
-import { redirect } from "next/navigation";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,9 +11,11 @@ export default function RootLayout({
 }>) {
   return (
     <div
-      className={`${inter.className} flex flex-col items-center justify-center h-auto`}
+      className={`${inter.className} flex flex-col items-center justify-center h-auto w-full`}
     >
-      <NavBar />
+      <Suspense fallback={<p>Loadin...</p>}>
+        <NavBar />
+      </Suspense>
       {children}
     </div>
   );

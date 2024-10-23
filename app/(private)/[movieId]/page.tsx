@@ -22,7 +22,7 @@ const MoviePage = async ({
     <section className="h-screen w-full flex flex-col items-center gap-8 overflow-x-hidden">
       <div className="relative w-full max-h-700 ">
         <div
-          className="absolute inset-0 w-full  flex items-center justify-center bg-carousel-movie"
+          className="absolute inset-0 w-full flex items-center justify-center bg-carousel-movie"
           style={{ zIndex: 1 }}
         >
           <div className={`flex gap-5  `}>

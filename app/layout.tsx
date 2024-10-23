@@ -12,7 +12,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.className} flex flex-col items-center justify-center h-auto`}
+        className={`${inter.className} flex flex-col items-center justify-center h-auto `}
       >
         <ThemeProvider
           attribute="class"
