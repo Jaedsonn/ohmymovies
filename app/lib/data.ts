@@ -68,7 +68,6 @@ export async function getSingleMovie(
 
     return toJson;
   } catch (error) {
-    console.log(error?.message);
     return null;
   }
 }
