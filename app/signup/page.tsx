@@ -36,13 +36,13 @@ export default function Signup() {
 
   const onSubmit: SubmitHandler<Zschema> = async (data) => {
     try {
-      const response = await ky.post("http://localhost:4001/signup", {
+      const response = await ky.post("http://localhost:4001/user/singup", {
         json: data,
       });
       const toJson: { token: string } = await response.json();
       setCookie("token", toJson.token, { maxAge: 604800 });
       router.push("/movies");
-      setError(false)
+      setError(false);
     } catch (error) {
       setError(true);
     }

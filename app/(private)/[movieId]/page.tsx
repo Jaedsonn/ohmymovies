@@ -4,6 +4,8 @@ import { Badge } from "../../components/ui/badge";
 import Image from "next/image";
 import Recomendeds from "../../components/Recomendeds";
 import { searchParams as ParamsType } from "@/app/lib/definitioins";
+import { FavoriteButton } from "@/app/components/Buttons";
+import { cookies } from "next/headers";
 
 const MoviePage = async ({
   params,
@@ -14,7 +16,7 @@ const MoviePage = async ({
 }) => {
   const movie = await getSingleMovie(
     params.movieId,
-    process.env.API_KEY || "",
+    process.env.API_HEADER || "",
     searchParams?.language || "en-US"
   );
 
@@ -52,6 +54,10 @@ const MoviePage = async ({
                     {genre.name}
                   </Badge>
                 ))}
+                <FavoriteButton
+                  token={cookies().get("token")?.value!}
+                  id={Number(params.movieId)}
+                />
               </div>
             </div>
           </div>

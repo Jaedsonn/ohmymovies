@@ -86,7 +86,7 @@ const NavBar = () => {
           >
             <DropdownMenuLabel className="p-2">
               <Button variant={"secondary"} className="bg-blue-700">
-                My Account
+                <Link href={"/movies/account"}>My Account</Link>
               </Button>
             </DropdownMenuLabel>
             <DropdownMenuSeparator className="h-px bg-zinc-700" />

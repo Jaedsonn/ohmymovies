@@ -54,16 +54,21 @@ export async function getPopularMovies(apikey: string, language: string) {
 
 export async function getSingleMovie(
   movieId: number,
-  apikey: string,
+  apiheader: string,
   language: string
 ) {
   try {
-    const url = `https://api.themoviedb.org/3/movie/${movieId}?language=${language}&api_key=${apikey}`;
-    const result = await ky.get(url);
+    const url = `https://api.themoviedb.org/3/movie/${movieId}?language=${language}`;
+    const result = await ky.get(url, {
+      headers: {
+        Authorization: `Bearer ${apiheader}`,
+      },
+    });
     const toJson: SingleMovie = await result.json();
 
     return toJson;
   } catch (error) {
+    console.log(error?.message);
     return null;
   }
 }
@@ -80,5 +85,34 @@ export async function getSimilarMovie(
     return toJson;
   } catch (error) {
     return null;
+  }
+}
+
+export async function getFavorites(token: string): Promise<any> {
+  try {
+    const movie = await ky.get("http://localhost:4001/favorites", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const toJson: { results: SingleMovie[] } = await movie.json();
+    return toJson;
+  } catch (error) {
+    return error;
+  }
+}
+
+export async function postFavorite(token: string, movieId: number) {
+  try {
+    await ky.post("http://localhost:4001/favorite/add", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ movieId:movieId }),
+    });
+  } catch (error) {
+    console.log(error)
+    return error;
   }
 }

@@ -1,5 +1,6 @@
 "use client";
 import { Skeleton } from "@/app/components/ui/skeleton";
+import { Input } from "./ui/input";
 
 export function CardSkeleton() {
   return (
@@ -20,5 +21,25 @@ export function GradleSkeleton() {
         <CardSkeleton key={i} />
       ))}
     </div>
+  );
+}
+
+export function InputSkeleton() {
+  return (
+    <section className={`w-full h-max flex flex-col items-start p-6 `}>
+      <div className={`flex flex-col w-full`}>
+        <h1 className="text-3xl font-bold mb-6">User informations</h1>
+        <div className="flex flex-col gap-4 *:w-full w-full">
+            <Skeleton
+            />
+            <Skeleton
+            />\
+            <Skeleton  />
+        </div>
+      </div>
+      {/* <div>
+        <h1>Favorites movies</h1>
+      </div> */}
+    </section>
   );
 }

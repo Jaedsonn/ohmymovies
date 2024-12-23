@@ -18,5 +18,5 @@ export default function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/", "/movies", "/[movieId]"],
+  matcher: ["/", "/movies", "/[movieId]", "/movies/account"],
 };
