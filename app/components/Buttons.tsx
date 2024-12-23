@@ -11,6 +11,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/app/components/ui/dropdown-menu";
+import { postFavorite } from "../lib/data";
 
 export function ModeToggle() {
   const { setTheme } = useTheme();
@@ -36,4 +37,10 @@ export function ModeToggle() {
       </DropdownMenuContent>
     </DropdownMenu>
   );
+}
+
+export function FavoriteButton({token, id}: {token: string, id:number}) {
+  return (
+    <Button type="submit" className="bg-yellow-500 text-white font-bold" onClick={async() =>await postFavorite(token, id)}>Favorite</Button>
+  )
 }

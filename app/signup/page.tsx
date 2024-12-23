@@ -1,7 +1,5 @@
 "use client";
-
 import Link from "next/link";
-import ky from "ky";
 import { Button } from "@/app/components/ui/button";
 import { Input } from "@/app/components/ui/input";
 import { Label } from "@/app/components/ui/label";
@@ -10,6 +8,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { setCookie } from "cookies-next";
+import ky from "ky";
 import { useState } from "react";
 import clsx from "clsx";
 
@@ -18,33 +17,33 @@ const schema = z.object({
   password: z
     .string()
     .min(6, { message: "A senha deve ter, no mínimo, 6 caracteres" }),
+  username: z.string().min(3, "O nome deve ter no mínimo 3 caracteres"),
 });
 
 type Zschema = z.infer<typeof schema>;
 
-export default function Login() {
+export default function Signup() {
   const router = useRouter();
   const [error, setError] = useState<boolean | null>(null);
 
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting, isDirty },
+    formState: { errors, isSubmitting },
   } = useForm<Zschema>({
     resolver: zodResolver(schema),
   });
 
   const onSubmit: SubmitHandler<Zschema> = async (data) => {
     try {
-      setError(false);
-      const response = await ky.post("http://localhost:4001/user/login", {
+      const response = await ky.post("http://localhost:4001/user/singup", {
         json: data,
       });
       const toJson: { token: string } = await response.json();
       setCookie("token", toJson.token, { maxAge: 604800 });
       router.push("/movies");
       setError(false);
-    } catch (err) {
+    } catch (error) {
       setError(true);
     }
   };
@@ -54,12 +53,27 @@ export default function Login() {
       <div className="flex items-center justify-center py-12">
         <div className="mx-auto grid w-[350px] gap-6">
           <div className="grid gap-2 text-center">
-            <h1 className="text-3xl font-bold">Login</h1>
+            <h1 className="text-3xl font-bold">Signup</h1>
             <p className="text-balance text-muted-foreground">
-              Enter your email below to login to your account
+              Enter your email below to Signup to your account
             </p>
           </div>
           <form className="grid gap-4" onSubmit={handleSubmit(onSubmit)}>
+            <div className="grid gap-2">
+              <Label htmlFor="username">Username</Label>
+              <Input
+                {...register("username", {
+                  required: "Este campo é obrigatório",
+                })}
+                placeholder="myusername"
+                type="text"
+              />
+              {errors?.username && (
+                <span className={`text-sm text-red-600 font-medium`}>
+                  {errors?.username?.message}
+                </span>
+              )}
+            </div>
             <div className="grid gap-2">
               <Label htmlFor="email">Email</Label>
               <Input
@@ -76,13 +90,8 @@ export default function Login() {
             <div className="grid gap-2">
               <div className="flex items-center">
                 <Label htmlFor="password">Password</Label>
-                <Link
-                  href="/forgot-password/resave"
-                  className="ml-auto inline-block text-sm underline"
-                >
-                  Forgot your password?
-                </Link>
               </div>
+
               <Input
                 type="password"
                 {...register("password", {
@@ -109,22 +118,22 @@ export default function Login() {
              animate-spin border-t-transparent`}
                 ></div>
               ) : (
-                "Login"
+                "Singup"
               )}
             </Button>
             <Button variant="outline" className="w-full">
-              Login with Google
+              Signup with Google
             </Button>
           </form>
           <div className="mt-4 text-center text-sm">
-            Don&apos;t have an account?{" "}
-            <Link href="/signup" className="underline">
-              Sign up
+            already have an account?{" "}
+            <Link href="/" className="underline">
+              Login
             </Link>
           </div>
         </div>
       </div>
-      <div className="hidden bg-muted lg:block rounded-sm "></div>
+      <div className="hidden bg-muted lg:block rounded-sm"></div>
     </div>
   );
 }

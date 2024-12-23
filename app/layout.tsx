@@ -10,9 +10,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.className} flex items-center justify-center h-auto`}
+        className={`${inter.className} flex flex-col items-center justify-center h-auto `}
       >
         <ThemeProvider
           attribute="class"

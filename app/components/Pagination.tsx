@@ -15,7 +15,7 @@ export const Pagination = ({ totalPages }: { totalPages: string }) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-   const lastPage = Number(totalPages);
+  const lastPage = Number(totalPages);
   const currentPage = searchParams.get("page") || "1";
 
   return (
