@@ -36,9 +36,12 @@ export default function Signup() {
 
   const onSubmit: SubmitHandler<Zschema> = async (data) => {
     try {
-      const response = await ky.post("http://localhost:4001/user/singup", {
-        json: data,
-      });
+      const response = await ky.post(
+        "https://ohmymovies-back.onrender.com/user/singup",
+        {
+          json: data,
+        }
+      );
       const toJson: { token: string } = await response.json();
       setCookie("token", toJson.token, { maxAge: 604800 });
       router.push("/movies");

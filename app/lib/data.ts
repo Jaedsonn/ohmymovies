@@ -89,11 +89,14 @@ export async function getSimilarMovie(
 
 export async function getFavorites(token: string): Promise<any> {
   try {
-    const movie = await ky.get("http://localhost:4001/favorites", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const movie = await ky.get(
+      "https://ohmymovies-back.onrender.com/favorites",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     const toJson: { results: SingleMovie[] } = await movie.json();
     return toJson;
   } catch (error) {
@@ -103,12 +106,12 @@ export async function getFavorites(token: string): Promise<any> {
 
 export async function postFavorite(token: string, movieId: number) {
   try {
-    await ky.post("http://localhost:4001/favorite/add", {
+    await ky.post("https://ohmymovies-back.onrender.com/favorite/add", {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ movieId:movieId }),
+      body: JSON.stringify({ movieId: movieId }),
     });
   } catch (error) {
     console.log(error)

@@ -37,9 +37,12 @@ export default function Login() {
   const onSubmit: SubmitHandler<Zschema> = async (data) => {
     try {
       setError(false);
-      const response = await ky.post("http://localhost:4001/user/login", {
-        json: data,
-      });
+      const response = await ky.post(
+        "https://ohmymovies-back.onrender.com/user/login",
+        {
+          json: data,
+        }
+      );
       const toJson: { token: string } = await response.json();
       setCookie("token", toJson.token, { maxAge: 604800 });
       router.push("/movies");

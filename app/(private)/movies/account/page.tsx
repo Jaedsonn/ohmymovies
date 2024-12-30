@@ -10,11 +10,14 @@ import { Suspense } from "react";
 
 export default async function account() {
   const token = cookies().get("token")?.value;
-  const getUser = await ky.get("http://localhost:4001/user/informations", {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  const getUser = await ky.get(
+    "https://ohmymovies-back.onrender.com/user/informations",
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
   const userInformations: User = await getUser.json();
   type User = {
     user: {
