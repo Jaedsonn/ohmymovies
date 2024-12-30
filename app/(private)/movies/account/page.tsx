@@ -1,9 +1,8 @@
 import Card from "@/app/components/Card";
-import { Pagination } from "@/app/components/Pagination";
 import { InputSkeleton } from "@/app/components/Skelletons";
 import { Input } from "@/app/components/ui/input";
-import {  getSingleMovie,getFavorites } from "@/app/lib/data";
-import { CardMovie, PopularMovieCard, SingleMovie } from "@/app/lib/definitioins";
+import { getSingleMovie, getFavorites } from "@/app/lib/data";
+import { CardMovie } from "@/app/lib/definitioins";
 import ky from "ky";
 import { cookies } from "next/headers";
 import { Suspense } from "react";
@@ -27,22 +26,25 @@ export default async function account() {
     };
   };
 
-const movies: any[] = [];
+  const movies: any[] = [];
 
-const favorites = (await getFavorites(token!)) || [];
+  const favorites = (await getFavorites(token!)) || [];
 
-const moviePromises = favorites.favorite.map(async (movie: number) => {
-  const movieData = await getSingleMovie(
-    movie,
-    process.env.API_HEADER || "",
-    "pt-BR"
-  );
-  if (movieData) {
-    movies.push(movieData);
+  if (favorites.length > 0) {
+    const moviePromises = favorites.favorite.map(async (movie: number) => {
+      const movieData = await getSingleMovie(
+        movie,
+        process.env.API_HEADER || "",
+        "pt-BR"
+      );
+      if (movieData) {
+        movies.push(movieData);
+      }
+    });
+
+    await Promise.all(moviePromises);
   }
-});
 
-await Promise.all(moviePromises);
   return (
     <Suspense fallback={<InputSkeleton />}>
       <section className={`w-full h-max flex flex-col items-start p-6 gap-10`}>
@@ -68,15 +70,21 @@ await Promise.all(moviePromises);
             <div
               className={`h-auto flex gap-6 flex-wrap w-fit items-center justify-center px-12`}
             >
-               {movies?.map((movie: CardMovie, index: number) => (
-                <Card
-                  name={movie.original_title}
-                  director={movie.vote_average}
-                  image={movie.poster_path}
-                  key={index}
-                  movieId={movie.id}
-                />
-              ))} 
+              {movies.length > 0 ? (
+                movies?.map((movie: CardMovie, index: number) => (
+                  <Card
+                    name={movie.original_title}
+                    director={movie.vote_average}
+                    image={movie.poster_path}
+                    key={index}
+                    movieId={movie.id}
+                  />
+                ))
+              ) : (
+                <p className="text-2xl font-bold text-center">
+                  No favorites movies
+                </p>
+              )}
             </div>
           </div>
         </div>
