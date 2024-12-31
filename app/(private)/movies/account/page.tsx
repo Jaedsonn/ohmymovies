@@ -2,7 +2,7 @@ import Card from "@/app/components/Card";
 import { InputSkeleton } from "@/app/components/Skelletons";
 import { Input } from "@/app/components/ui/input";
 import { getSingleMovie, getFavorites } from "@/app/lib/data";
-import { CardMovie } from "@/app/lib/definitioins";
+import { SingleMovie } from "@/app/lib/definitioins";
 import ky from "ky";
 import { cookies } from "next/headers";
 import { Suspense } from "react";
@@ -26,22 +26,22 @@ export default async function account() {
     };
   };
 
-  const movies: any[] = [];
+  const movies: SingleMovie[] = [];
 
   const favorites = (await getFavorites(token!)) || [];
 
   const moviePromises = favorites?.favorite?.map(async (movie: number) => {
-      const movieData = await getSingleMovie(
-        movie,
-        process.env.API_HEADER || "",
-        "pt-BR"
-      );
-      if (movieData) {
-        movies.push(movieData);
-      }
-    });
+    const movieData = await getSingleMovie(
+      movie,
+      process.env.API_HEADER || "",
+      "pt-BR"
+    );
+    if (movieData) {
+      movies.push(movieData);
+    }
+  });
 
-    await Promise.all(moviePromises);
+  moviePromises !== undefined ? await Promise.all(moviePromises) : null;
 
   return (
     <Suspense fallback={<InputSkeleton />}>
@@ -69,10 +69,10 @@ export default async function account() {
               className={`h-auto flex gap-6 flex-wrap w-fit items-center justify-center px-12`}
             >
               {movies.length > 0 ? (
-                movies?.map((movie: CardMovie, index: number) => (
+                movies?.map((movie: SingleMovie, index: number) => (
                   <Card
                     name={movie.original_title}
-                    director={movie.vote_average}
+                    director={movie.vote_average.toString()}
                     image={movie.poster_path}
                     key={index}
                     movieId={movie.id}
