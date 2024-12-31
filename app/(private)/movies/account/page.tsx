@@ -42,7 +42,8 @@ export default async function account() {
   });
 
   moviePromises && (await Promise.all(moviePromises));
-
+  console.log(favorites)
+  console.log(movies.length)
   return (
     <Suspense fallback={<InputSkeleton />}>
       <section className={`w-full h-max flex flex-col items-start p-6 gap-10`}>
