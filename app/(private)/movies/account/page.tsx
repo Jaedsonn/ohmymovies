@@ -30,8 +30,7 @@ export default async function account() {
 
   const favorites = (await getFavorites(token!)) || [];
 
-  if (favorites.length > 0) {
-    const moviePromises = favorites.favorite.map(async (movie: number) => {
+  const moviePromises = favorites?.favorite?.map(async (movie: number) => {
       const movieData = await getSingleMovie(
         movie,
         process.env.API_HEADER || "",
@@ -43,7 +42,6 @@ export default async function account() {
     });
 
     await Promise.all(moviePromises);
-  }
 
   return (
     <Suspense fallback={<InputSkeleton />}>
