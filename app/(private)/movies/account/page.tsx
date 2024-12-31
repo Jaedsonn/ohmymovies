@@ -41,7 +41,7 @@ export default async function account() {
     }
   });
 
-  moviePromises !== undefined ? await Promise.all(moviePromises) : null;
+  moviePromises && (await Promise.all(moviePromises));
 
   return (
     <Suspense fallback={<InputSkeleton />}>
